@@ -22,3 +22,8 @@ steps:
     image: codefresh/cli
     commands:
     - sh bin/test-release.sh
+    when:
+      condition:
+        any:
+          prOpened: '"${{CF_PULL_REQUEST_ACTION}}" == "opened"'
+          prReOpened: '"${{CF_PULL_REQUEST_ACTION}}" == "reopened"'
