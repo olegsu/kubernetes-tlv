@@ -8,6 +8,5 @@ spec:
   containers:
   - name: {{ .Release.Name }}-test
     image: {{ .Values.testImage }}
-    command:
-    - echo "Running release test"
+    command: ["sh", "-c", "echo", "Ruuning release test"]
   restartPolicy: Never
