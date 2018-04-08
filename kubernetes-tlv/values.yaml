@@ -21,3 +21,6 @@ serviceType: LoadBalancer
 
 # redeploy true to redeploy the the deployment
 redeploy: false
+
+# image to be used to test the release
+testImage: alpine

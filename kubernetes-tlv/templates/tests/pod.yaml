@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: name: {{ template "fullname" . }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+  - name: {{ template "fullname" . }}
+    image: {{ .Values.testImage }}
+    command: 
+    - echo "Running release test"
+  restartPolicy: Never
