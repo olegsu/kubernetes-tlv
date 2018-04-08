@@ -17,7 +17,7 @@ exportVariables(){
         cf_export IS_FEATURE=true
     fi
 
-    if [ "$CF_PULL_REQUEST_ACTION" = "opened"] || [ "$CF_PULL_REQUEST_ACTION" = "reopened"]
+    if [ "$CF_PULL_REQUEST_ACTION" = "opened" ] || [ "$CF_PULL_REQUEST_ACTION" = "reopened" ]
     then
         cf_export RUN_FULL_CD="true"
     fi
