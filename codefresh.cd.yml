@@ -1,0 +1,24 @@
+version: '1.0'
+steps:
+
+  strict_to_production:
+    title: Reading production version
+    image: codefresh/kube-helm:master
+    commands:
+    - ./bin/read-production-version.sh
+    when:
+      branch:
+        only:
+          - master
+
+  install_chart:
+    title: Installing chart
+    image: codefresh/cli
+    commands:
+    - sh bin/install-chart.sh
+
+  test_release:
+    title: Testing release
+    image: codefresh/cli
+    commands:
+    - codefresh test-release  --cluster $WORKING_CLUSTER
