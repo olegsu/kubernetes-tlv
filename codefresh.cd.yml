@@ -17,8 +17,13 @@ steps:
     commands:
     - sh bin/install-chart.sh
 
+
   test_release:
     title: Testing release
     image: codefresh/cli
     commands:
-    - codefresh test-release  --cluster $WORKING_CLUSTER
+    - sh bin/test-release.sh
+    when:
+      condition:
+        any:
+          runFullCD: '"${{RUN_FULL_CD}}" == "true"'
