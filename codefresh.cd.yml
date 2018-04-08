@@ -17,7 +17,7 @@ steps:
     commands:
     - sh bin/install-chart.sh
 
-  install_chart:
+  env:
     title: Installing chart
     image: alpine
     commands:
