@@ -8,4 +8,5 @@ codefresh run $CD_PIPELINE_NAME \
     --variable HELM_REPO_NAME=$HELM_REPO_NAME \
     --variable CHART_NAME=$CHART_NAME \
     --variable IS_FEATURE=$IS_FEATURE \
+    --variable RUN_FULL_CD=$RUN_FULL_CD \
     --sha $CF_REVISION

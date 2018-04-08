@@ -26,5 +26,4 @@ steps:
     when:
       condition:
         any:
-          prOpened: '"${{CF_PULL_REQUEST_ACTION}}" == "opened"'
-          prReOpened: '"${{CF_PULL_REQUEST_ACTION}}" == "reopened"'
+          runFullCD: '"${{RUN_FULL_CD}}" == "true"'
