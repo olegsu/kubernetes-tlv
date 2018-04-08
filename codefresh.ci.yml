@@ -1,5 +1,10 @@
 version: '1.0'
 steps:
+  env:
+    image: alpine
+    commands:
+    - env
+
   build_step:
     title: Building docker image
     type: build
