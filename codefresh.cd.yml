@@ -1,6 +1,8 @@
 version: '1.0'
 steps:
 
+  # When the target environment is production
+  # make sure the version been promoted
   strict_to_production:
     title: Reading production version
     image: codefresh/kube-helm:master
@@ -11,13 +13,15 @@ steps:
         only:
           - master
 
+  # Run codefresh chart installation
   install_chart:
     title: Installing chart
     image: codefresh/cli
     commands:
     - sh bin/install-chart.sh
 
-
+  # When the commit associated with github PR
+  # run helm test on that release
   test_release:
     title: Testing release
     image: codefresh/cli

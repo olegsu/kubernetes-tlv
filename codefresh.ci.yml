@@ -1,6 +1,7 @@
 version: '1.0'
 steps:
 
+  # Build docker image and store it in Codefresh
   build_step:
     title: Building docker image
     type: build
@@ -10,6 +11,7 @@ steps:
       set:
         - CF_QUALITY: true
 
+  # Execute unit test on the build image
   unit_test:
     title: Running unit test
     image: codefresh/cli
@@ -20,23 +22,27 @@ steps:
         set:
           - '${{build_step.imageId}}':
               - Unit_Test: 'Pass'
-        
+
+  # Package and store the Helm chart
   helm_package:
     title: Building helm package from current commit
     image: codefresh/kube-helm:master
     commands:
     - ./bin/package-chart.sh
 
+  # Push the image to docker registry
   push:
     title: Pushing image to Dockerhub
     type: push
     image_name: codefresh/kubernetes-tlv
     candidate: ${{build_step}}
     tags:
+    # Version from codefesh - include metadata on the branch
     - ${{VERSION}}
     - ${{CF_BRANCH_TAG_NORMALIZED}}
     - ${{CF_SHORT_REVISION}}
 
+  # Execute CD pipeline
   run_cd:
     title: Executing CD pipeline
     image: codefresh/cli
