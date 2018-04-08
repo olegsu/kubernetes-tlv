@@ -1,11 +1,6 @@
 version: '1.0'
 steps:
 
-  env:
-    image: alpine
-    commands:
-    - env
-    
   strict_to_production:
     title: Reading production version
     image: codefresh/kube-helm:master
