@@ -17,6 +17,12 @@ steps:
     commands:
     - sh bin/install-chart.sh
 
+  install_chart:
+    title: Installing chart
+    image: alpine
+    commands:
+    - env
+
   test_release:
     title: Testing release
     image: codefresh/cli
