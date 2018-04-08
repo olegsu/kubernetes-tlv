@@ -21,4 +21,4 @@ steps:
     title: Testing release
     image: codefresh/cli
     commands:
-    - codefresh test-release  --cluster $WORKING_CLUSTER
+    - sh bin/test-release.sh
