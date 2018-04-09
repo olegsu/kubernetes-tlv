@@ -2,7 +2,7 @@
 
 source $PWD/bin/helpers.sh
 
-runCodefreshCmd(){
+runInstallChartCmd(){
     releaseName=$(processReleaseName)
     cmd="codefresh install-chart"
     cmd="$cmd --tiller-namespace kube-system"
@@ -31,5 +31,5 @@ then
     echo "Current version wasnt changed"
     exit 1
 else
-    runCodefreshCmd
+    runInstallChartCmd
 fi
