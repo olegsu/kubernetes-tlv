@@ -51,7 +51,7 @@ pushPackgeToHelmRepo(){
 }
 
 
-echo "Setting new image tag to be: $CF_BRANCH_TAG_NORMALIZED"
+echo "Setting new image tag to be: $new_version"
 $(updateValuesWithCurrentImageTag)
 
 echo "Adding metadata to chart source"
