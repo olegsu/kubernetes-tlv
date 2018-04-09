@@ -14,6 +14,11 @@ runCodefreshCmd(){
     cmd="$cmd --version $VERSION"
     if $IS_FEATURE ; then cmd="$cmd --context dynamic" ; fi
 
+    if [[  -n "$DOCKER_CONFIG_CTX_NAME" ]];
+    then
+        cmd="$cmd --context $DOCKER_CONFIG_CTX_NAME"
+    fi
+
     echo "Running install cmd: $cmd"
     eval $cmd
 }

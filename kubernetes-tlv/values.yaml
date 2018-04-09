@@ -24,3 +24,6 @@ redeploy: false
 
 # image to be used to test the release
 testImage: alpine
+
+# docker config to pull images - by default will pull public image from dockerhub
+dockercfg: ""

@@ -31,9 +31,22 @@ steps:
     - ./bin/package-chart.sh
 
   # Push the image to docker registry
-  push:
+  push_dockerhub:
     title: Pushing image to Dockerhub
     type: push
+    image_name: codefresh/kubernetes-tlv
+    candidate: ${{build_step}}
+    tags:
+    # Version from codefesh - include metadata on the branch
+    - ${{VERSION}}
+    - ${{CF_BRANCH_TAG_NORMALIZED}}
+    - ${{CF_SHORT_REVISION}}
+
+  # Push the image to codefresh registry
+  push_cfcr:
+    title: Pushing image to CFCR
+    type: push
+    registry: cfcr
     image_name: codefresh/kubernetes-tlv
     candidate: ${{build_step}}
     tags:
