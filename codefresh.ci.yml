@@ -21,7 +21,7 @@ steps:
       metadata:
         set:
           - '${{build_step.imageId}}':
-              - Unit_Test: 'Pass'
+              - Unit_Test: true
 
   # Package and store the Helm chart
   helm_package:
