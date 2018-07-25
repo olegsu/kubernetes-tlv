@@ -1,2 +1,2 @@
-kubernetes-tlv hello world application
+kubernetes-tlv hello world application (CI/CD example)
 
