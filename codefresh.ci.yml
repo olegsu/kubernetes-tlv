@@ -1,64 +1,35 @@
 version: '1.0'
+mode: parallel
 steps:
-
-  # Build docker image and store it in Codefresh
-  build_step:
-    title: Building docker image
-    type: build
-    dockerfile: Dockerfile
-    image_name: codefresh/kubernetes-tlv
-    metadata:
-      set:
-        - CF_QUALITY: true
-
-  # Execute unit test on the build image
-  unit_test:
-    title: Running unit test
-    image: codefresh/cli
+  step1
+    image: alpine:3.8
     commands:
-    - echo "Running unit test"
-    on_success:
-      metadata:
-        set:
-          - '${{build_step.imageId}}':
-              - Unit_Test: true
+    - cf_export TEST_1=1
+    - env
 
-  # Package and store the Helm chart
-  helm_package:
-    title: Building helm package from current commit
-    image: codefresh/kube-helm:master
+  step2:
+    image: alpine:3.8
     commands:
-    - ./bin/package-chart.sh
-
-  # Push the image to docker registry
-  push_dockerhub:
-    title: Pushing image to Dockerhub
-    type: push
-    image_name: codefresh/kubernetes-tlv
-    candidate: ${{build_step}}
-    tags:
-    # Version from codefesh - include metadata on the branch
-    - ${{VERSION}}
-    - ${{CF_BRANCH_TAG_NORMALIZED}}
-    - ${{CF_SHORT_REVISION}}
-
-  # Push the image to codefresh registry
-  push_cfcr:
-    title: Pushing image to CFCR
-    type: push
-    registry: cfcr
-    image_name: codefresh/kubernetes-tlv
-    candidate: ${{build_step}}
-    tags:
-    # Version from codefesh - include metadata on the branch
-    - ${{VERSION}}
-    - ${{CF_BRANCH_TAG_NORMALIZED}}
-    - ${{CF_SHORT_REVISION}}
-
-  # Execute CD pipeline
-  run_cd:
-    title: Executing CD pipeline
-    image: codefresh/cli
+    - cf_export TEST_2=2
+    - env
+    when:
+      steps:
+      - name: step1
+    
+    
+  step3:
+    image: alpine:3.8
     commands:
-    - sh bin/run-cd.sh
-    fail_fast: false
+    - cf_export TEST_1=2
+    - env
+    when:
+      steps:
+      - name: step1    
+
+  step4:
+    image: alpine:3.8
+    commands:
+    - env
+    when:
+      steps:
+      - name: step3    
